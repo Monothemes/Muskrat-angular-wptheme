@@ -1,0 +1,47 @@
+/*!
+ * Start Bootstrap - Blog Post HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+
+footer {
+    margin: 50px 0;
+}
+
+/** SAVE MODAL **/
+div#save{
+	padding:20px;
+	
+	form{
+		width:100%;
+		input,textarea, button{
+			width:90%;
+			display:block;
+			margin:0 auto;
+		}
+		input[type="submit"], button{
+			padding:10px;
+			margin:10px auto;
+		}
+		textarea{
+			height:400px;
+		}
+		span.mceEditor{
+			display:block;
+			width:93%;
+			padding:4px 6px;
+			display:block;
+			margin:0 auto;
+			position: relative;
+			
+			table{
+				width:100%;
+			}
+		}
+	}
+}

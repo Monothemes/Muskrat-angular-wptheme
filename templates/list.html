@@ -1,0 +1,79 @@
+<ng-include src=" dir + '/templates/form.html?v=2' "></ng-include>
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <h1 class="page-header">
+                    Latest Posts
+                    <!-- <small>Secondary Text</small> -->
+                </h1>
+
+                <!-- First Blog Post -->
+                <article ng-repeat="post in posts">
+
+                    <!-- title -->
+                    <h2>
+                        <a href="/{{post.slug}}">{{post.title.rendered}}</a>
+                    </h2>
+
+                    <!-- autor -->
+                    <p class="lead">
+                        by <a href="author/{{post.author_name}}">{{post.author_name}}</a>
+                    </p>
+
+                    <!-- date -->
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on {{post.date | date:'dd MMM yyyy'}}</p>
+
+                    <!-- category -->
+                    <p ng-if="post.the_category">
+                        Category: <a ng-repeat="cat in post.the_category" href="category/{{cat.name}}">{{cat.name}}</a>
+                    </p>
+
+                    <hr>
+
+                    <!-- featured_image -->
+                    <img ng-if="post.featured_image" class="img-responsive" ng-src="{{post.featured_image_thumbnail_url}}" alt="">
+                    <hr ng-if="post.featured_image">
+
+                    <!-- excerpt content -->
+                    <p ng-bind-html="post.excerpt.rendered | to_trusted"></p>
+
+                    <!-- tags -->
+                    <p ng-if="post.the_tag">
+                        <span class="glyphicon glyphicon-tags"></span> tags: <a ng-repeat="tag in post.the_tag" href="tag/{{tag.name}}">{{tag.name}} </a>
+                    </p>
+
+                    <!-- more -->
+                    <a class="btn btn-primary" href="{{site + '/' + post.slug}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                    <!-- save/edit post -->
+                    <button ng-show="is_admin" ng-click="deletePost($index, post)" class="btn btn-mini">Delete</button>
+                    <button ng-show="is_admin" ng-click="editPost(post)" data-toggle="modal" data-target="#save" class="btn btn-mini">Edit</button>
+
+
+                    <hr>
+                </article>
+
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="previous">
+                        <a ng-if="currentPage>1" ng-click="Paged_prev()" ng-href="paged/{{currentPage-1}}">&larr; Older</a>
+                    </li>
+                    <li class="next">
+                        <a ng-if="currentPage<totalPages" ng-click="Paged_next()" ng-href="paged/{{currentPage+1}}">Newer &rarr;</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- add new post -->
+            <div class="col-md-4">
+                <div ng-show="is_admin" class="well">
+                    <h4>Click to add new post</h4>
+                    <button class="btn btn-default btn-lg" ng-click="addPost()" data-toggle="modal" data-target="#save">add new post</button>
+                </div>
+            </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <sidebar></sidebar>
+
